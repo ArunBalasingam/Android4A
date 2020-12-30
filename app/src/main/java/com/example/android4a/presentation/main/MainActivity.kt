@@ -1,8 +1,9 @@
 package com.example.android4a.presentation.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.example.android4a.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,16 +17,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainViewModel.loginLiveData.observe(this, Observer {
-            when(it){
+        mainViewModel.loginLiveData.observe(this, {
+            when (it) {
                 is LoginSuccess -> {
-
+                    val intent = Intent(this, DetailActivity::class.java)
+                    intent.putExtra("key", it.user)
+                    startActivity(intent)
                 }
                 LoginError -> {
                     MaterialAlertDialogBuilder(this)
                         .setTitle("Erreur")
-                        .setMessage("Compte Inconnu")
-                        .setPositiveButton("Ok") { dialog, which ->
+                        .setMessage("Compte inconnu")
+                        .setPositiveButton("OK") { dialog, _ ->
                             dialog.dismiss()
                         }
                         .show()
@@ -33,8 +36,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        login_button.setOnClickListener{
-            mainViewModel.onClickedLogin(login_edit.text.toString().trim(),password_edit.text.toString())
+        login_button.setOnClickListener {
+            mainViewModel.onClickedLogin(login_edit.text.toString().trim(), password_edit.text.toString() )
+        }
+
+        create_account_button.setOnClickListener {
+            mainViewModel.onClickedCreateAccount(login_edit.text.toString().trim(), password_edit.text.toString(), getSupportFragmentManager())
         }
     }
 }
