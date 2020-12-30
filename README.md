@@ -23,6 +23,7 @@ On voit ci-dessous la page de connection :
 
 ### Ecran détail
 Ici nous voyons dans cette images les information de l'utilisateur après sa connection:
+
 <img src="images/2.png" width=350 >
 
 ## Ajout futur
