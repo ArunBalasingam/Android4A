@@ -19,11 +19,11 @@ ajout bonus:
 ### Premier écran
 On voit ci-dessous la page de connection :
 
-<img src="Screen_ReadMe/2.png" width=350>
+<img src="image/1.png" width=350>
 
 ### Ecran détail
 Ici nous voyons dans cette images les information de l'utilisateur après sa connection:
-<img src="Screen_ReadMe/1.png" width=350 >
+<img src="image/2.png" width=350 >
 
 ## Ajout futur
 
