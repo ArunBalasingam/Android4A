@@ -1,19 +1,22 @@
 package com.example.android4a.injection
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.room.Room
 import com.example.android4a.data.local.AppDatabase
 import com.example.android4a.data.local.DatabaseDao
 import com.example.android4a.data.repository.UserRepository
 import com.example.android4a.domain.usecase.CreateUserUseCase
 import com.example.android4a.domain.usecase.GetUserUseCase
+import com.example.android4a.presentation.main.CreateAccountViewModel
 import com.example.android4a.presentation.main.MainViewModel
+import com.example.android4a.presentation.main.DetailViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val presentationModule = module {
-    factory { MainViewModel(get(),get()) }
+    factory { MainViewModel(get()) }
+    factory { CreateAccountViewModel(get()) }
+    factory { DetailViewModel(get()) }
 }
 
 val domainModule = module {
@@ -22,11 +25,11 @@ val domainModule = module {
 }
 
 val dataModule = module {
-   single{ UserRepository(get())}
-    single { createDataBase(androidContext()) }
+    single { UserRepository(get()) }
+    single { createDatabase(androidContext())}
 }
 
-fun createDataBase(context: Context): DatabaseDao{
+fun createDatabase(context: Context): DatabaseDao {
     val appDatabase = Room.databaseBuilder(
         context,
         AppDatabase::class.java, "database-name"
